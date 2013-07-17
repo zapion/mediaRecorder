@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Media test: mediaRecorder</title>
+  <meta charset='utf-8'>
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<pre id="test">
+<script class="testbody" type="text/javascript">
+var mr;
+var passed = "truthy";
+var recordcount = 0;
+var v = document.createElement('audio');
+var vout = document.createElement('audio');
+
+function ok(check, msg)
+{
+  dump(check, msg);
+}
+function dataavailable(e) {
+  ok(e.data.size > 0, "can get data from encoder");
+}
+
+//encoder only support 48k/16k mono audio channel
+v.src = "dtmfmono48k.ogg";
+stream = v.mozCaptureStreamUntilEnded();
+vout.mozSrcObject = stream;
+v.play();
+vout.play();
+document.body.appendChild(v);
+mr = new MediaRecorder(stream);
+mr.ondataavailable = dataavailable;
+mr.start(1000);
+</script>
+</pre>
+</body>
+</html>
