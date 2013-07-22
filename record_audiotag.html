@@ -11,27 +11,25 @@
 var mr;
 var passed = "truthy";
 var recordcount = 0;
-var v = document.createElement('audio');
-var vout = document.createElement('audio');
+var a = document.createElement('audio');
 
-function ok(check, msg)
-{
-  dump(check, msg);
-}
 function dataavailable(e) {
+alert("hihi");
   ok(e.data.size > 0, "can get data from encoder");
 }
 
+function record()
+{
+    stream = a.mozCaptureStreamUntilEnded();
+    document.mr = new MediaRecorder(stream);
+    document.mr.ondataavailable = dataavailable;
+    document.mr.start(1000);
+}
 //encoder only support 48k/16k mono audio channel
-v.src = "dtmfmono48k.ogg";
-stream = v.mozCaptureStreamUntilEnded();
-vout.mozSrcObject = stream;
-v.play();
-vout.play();
-document.body.appendChild(v);
-mr = new MediaRecorder(stream);
-mr.ondataavailable = dataavailable;
-mr.start(1000);
+  document.body.appendChild(a);
+  a.src = "dtmfmono48k.ogg";
+  a.play();
+  setTimeout('record();', 1000);
 </script>
 </pre>
 </body>

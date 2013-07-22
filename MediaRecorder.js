@@ -25,6 +25,24 @@ function stopcb() {
 }
 
 function Start() {
+/*
+
+  var context = new AudioContext();
+  var buffer = context.createBuffer(1, 204800, context.sampleRate);
+  for (var i = 0; i < 204800; ++i) {
+    buffer.getChannelData(0)[i] = Math.sin(1000 * 2 * Math.PI * i / context.sampleRate);
+  }
+
+  var source = context.createBufferSource();
+  source.buffer = buffer;
+
+  var dest = context.createMediaStreamDestination();
+  source.connect(dest);
+  var elem = document.getElementById('audioelem');
+  elem.mozSrcObject = dest.stream;
+  source.start(0);
+  elem.play();
+*/
   if (mMediaRecorder == null)
     mMediaRecorder = new MediaRecorder(mMediaStream);
   mBlob = null;

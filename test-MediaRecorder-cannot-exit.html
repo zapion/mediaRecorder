@@ -1,0 +1,61 @@
+
+<!DOCTYPE HTML>
+<html>
+<!--
+https://bugzilla.mozilla.org/show_bug.cgi?id=894348
+-->
+<head>
+  <title>Test Reload page with MediaRecorder object</title>
+  <script type="application/javascript" src="/MochiKit/MochiKit.js"></script>
+  <script type="application/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
+  <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css"/>
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=894348">Mozill
+a Bug 894348</a>
+<p id="display"></p>
+<div id="content" style="display: none">
+</div>
+
+<video id="v"></video>
+
+<pre id="test">
+<script type="text/javascript">
+var mediaRecorder = null;
+
+navigator.mozGetUserMedia({audio: true}, function(stream) {
+	mediaRecorder = new MediaRecorder(stream);
+
+	mediaRecorder.ondataavailable = function(evt) {
+		console.log('ondataavailable fired');
+		console.log(evt);
+	};
+
+	mediaRecorder.onerror = function(evt) {
+		console.log('onerror fired');
+		console.log(evt);
+	};
+
+	mediaRecorder.onstop = function(evt) {
+		console.log('onstop fired');
+		console.log(evt);
+	};
+
+  mediaRecorder.start(1000);
+  setTimeout('mediaRecorder.stop();', 3000);
+
+}, function(err) {
+	console.log(err);
+});
+
+</script>
+</pre>
+</body>
+</html>
+
+
+
+
+
+

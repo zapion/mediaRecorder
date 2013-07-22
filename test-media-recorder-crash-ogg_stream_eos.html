@@ -1,0 +1,12 @@
+<script>
+navigator.mozGetUserMedia(
+    {audio: true},
+    function(stream) {
+        var m = new MediaRecorder(stream);
+        try {
+            m.start(0);
+        } catch (e) {}
+    }, 
+    function(e) {}
+);
+</script>
