@@ -43,7 +43,8 @@ function getAudioContext() {
   elem.play();
 
 }
-function Start() {
+
+function Start(time) {
   if (mMediaRecorder == null)
     mMediaRecorder = new MediaRecorder(mMediaStream);
   mBlob = null;
@@ -51,7 +52,7 @@ function Start() {
   mMediaRecorder.ondataavailable = dataavailablecb;
   mMediaRecorder.onerror = errorcb;
 
-  mMediaRecorder.start(1000);
+  mMediaRecorder.start(time);
   document.getElementById('status').value  = mMediaRecorder.state;
 }
 
@@ -125,8 +126,10 @@ function Save() {
 window.onload = function() {
   document.getElementById("gerUserMedia").onclick = function() { gUM();};
   document.getElementById("gerAudioContext").onclick = function() { getAudioContext();};
-  document.getElementById("Start").onclick = function() { Start();};
+  document.getElementById("Start").onclick = function() { Start(1000);};
+  document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Stop").onclick = function() { Stop(); };
+  document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
   document.getElementById("Resume").onclick = function() { Resume(); };
   document.getElementById("Pause").onclick = function() { Pause(); };
   document.getElementById("Save").onclick = function() { Save(); };
