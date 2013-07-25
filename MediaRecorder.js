@@ -140,6 +140,7 @@ window.onload = function() {
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Stop").onclick = function() { Stop(); };
+  document.getElementById("Stopms").onclick = function() { mMediaStream.stop(); };
   document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
   document.getElementById("Resume").onclick = function() { Resume(); };
   document.getElementById("Pause").onclick = function() { Pause(); };
