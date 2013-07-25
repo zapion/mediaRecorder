@@ -44,6 +44,13 @@ function getAudioContext() {
 
 }
 
+function getAudioTag() {
+  var a = document.getElementById('audioelem');
+  a.src = "dtmfmono48k.ogg";
+  a.play();
+  setTimeout(function() {mMediaStream = a.mozCaptureStreamUntilEnded();}, 1000);
+}
+
 function Start(time) {
   if (mMediaRecorder == null)
     mMediaRecorder = new MediaRecorder(mMediaStream);
@@ -127,8 +134,9 @@ function Save() {
 }
 
 window.onload = function() {
-  document.getElementById("gerUserMedia").onclick = function() { gUM();};
-  document.getElementById("gerAudioContext").onclick = function() { getAudioContext();};
+  document.getElementById("getUserMedia").onclick = function() { gUM();};
+  document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
+  document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Stop").onclick = function() { Stop(); };
