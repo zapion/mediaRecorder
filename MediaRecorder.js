@@ -47,11 +47,14 @@ function getAudioContext() {
 function Start(time) {
   if (mMediaRecorder == null)
     mMediaRecorder = new MediaRecorder(mMediaStream);
+  else if (mMediaRecorder.state != "inactive") {
+    alert("mMediaRecorder is not inactive, stop it first");
+    return;
+  }
   mBlob = null;
   mMediaRecorder.onstop = stopcb;
   mMediaRecorder.ondataavailable = dataavailablecb;
   mMediaRecorder.onerror = errorcb;
-
   mMediaRecorder.start(time);
   document.getElementById('status').value  = mMediaRecorder.state;
 }
@@ -89,7 +92,7 @@ function PlaybackIDX() {
 
         transaction.objectStore("ogg").get("audio").onsuccess = function (event) {
                 var audioblob = event.target.result;
-                console.log("Got elephant!" + audioblob.size);
+                console.log("Got blob!" + audioblob.size);
                 _FReader = new FileReader();
                 _FReader.readAsDataURL(audioblob);
                 _FReader.onload = function (_FREvent) {

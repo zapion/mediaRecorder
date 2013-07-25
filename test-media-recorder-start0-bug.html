@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Test that reloading media recorder object</title>
+  <script type="text/javascript" src="/tests/SimpleTest/SimpleTest.js"></script>
+  <link rel="stylesheet" type="text/css" href="/tests/SimpleTest/test.css" />
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<a target="_blank" href="https://bugzilla.mozilla.org/show_bug.cgi?id=">Mozill
+a Bug </a>
+<pre id="test">
+<script class="testbody" type="text/javascript">
+  navigator.mozGetUserMedia({audio:true},
+                       function(s) {
+                         o2 = new MediaRecorder(s);
+                         o2.dataavailable = function(e) { dump(e);}
+                         o2.start(0);
+setTimeout('o2.stop()', 3000);
+                       },
+                       function(e) {dump(e)});
+</script>
+</pre>
+</body>
+</html>

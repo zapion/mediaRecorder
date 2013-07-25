@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Media test: mediaRecorder</title>
+  <meta charset='utf-8'>
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<pre id="test">
+<audio id="audioelem"></audio>
+<script class="testbody" type="text/javascript">
+
+  var context = new AudioContext();
+  var buffer = context.createBuffer(1, 204800, context.sampleRate);
+  for (var i = 0; i < 204800; ++i) {
+    buffer.getChannelData(0)[i] = Math.sin(440 * 2 * Math.PI * i / context.sampleRate);
+  }
+
+  var source = context.createBufferSource();
+  source.buffer = buffer;
+
+  var dest = context.createMediaStreamDestination();
+  source.connect(dest);
+
+  var elem = document.getElementById('audioelem');
+  elem.mozSrcObject = dest.stream;
+  elem.onloadedmetadata = function() {
+    setTimeout(function() {
+    document.mr = new MediaRecorder(dest.stream);
+    document.mr.ondataavailable = function(e) {dump(e);};
+    document.mr.start(1000);
+
+    }, 1000);
+  };
+
+  source.start(0);
+  elem.play();
+
+</script>
+</pre>
+</body>
+</html>
+
+
