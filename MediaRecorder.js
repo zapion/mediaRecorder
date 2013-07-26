@@ -2,7 +2,7 @@ var mMediaStream;
 var mMediaRecorder;
 var mBlob;
 var audioReplay = document.createElement('audio');
-
+var audioout = document.createElement('audio');
 function gUM() {
   navigator.mozGetUserMedia({audio:true},
                        function(s) {
@@ -47,8 +47,11 @@ function getAudioContext() {
 function getAudioTag() {
   var a = document.getElementById('audioelem');
   a.src = "dtmfmono48k.ogg";
+  audioout.mozSrcObject = a.mozCaptureStreamUntilEnded();
+  mMediaStream = a.mozCaptureStreamUntilEnded();
   a.play();
-  setTimeout(function() {mMediaStream = a.mozCaptureStreamUntilEnded();}, 1000);
+  document.body.appendChild(audioout);
+  audioout.play();
 }
 
 function Start(time) {
