@@ -1,0 +1,23 @@
+<script>
+function ok(a, b) {
+ alert(a + " " + b);
+}
+function startTest() {
+  navigator.mozGetUserMedia({audio:true,fake:true},
+                       function(s) {
+
+                         s.stop();
+                                                alert(s);
+                         mr = new MediaRecorder(s);
+                         try {
+                           mr.start(1000);
+                           ok(false, 'Can not record this mediastream');
+                         } catch (e) {
+                           ok(true, 'catch this bad behavior');
+                           SimpleTest.finish();
+                         }
+                       },
+                       function(e) {dump(e)});
+}
+startTest();
+</script>

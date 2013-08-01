@@ -1,5 +1,7 @@
 var mMediaStream;
+var mMediaStream2;
 var mMediaRecorder;
+var mMediaRecorder2;
 var mBlob;
 var audioReplay = document.createElement('audio');
 var audioout = document.createElement('audio');
@@ -11,6 +13,25 @@ function gUM() {
                        },
                        function(e) {dump(e)});
 }
+
+function gFakeGUM() {
+  navigator.mozGetUserMedia({audio:true, fake:true},
+                       function(s) {
+                         mMediaStream = s;
+                         document.getElementById('mediastream').value  = mMediaStream;
+                       },
+                       function(e) {dump(e)});
+}
+
+function gUM2() {
+  navigator.mozGetUserMedia({audio:true},
+                       function(s) {
+                         mMediaStream2 = s;
+                         document.getElementById('mediastream').value  = mMediaStream2;
+                       },
+                       function(e) {dump(e)});
+}
+
 function dataavailablecb(aData) {
   mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
   document.getElementById('size').value  = mBlob.size;
@@ -138,6 +159,8 @@ function Save() {
 
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
+  document.getElementById("getUserMedia2").onclick = function() { gUM2();};
+  document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
   document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
   document.getElementById("Start").onclick = function() { Start(1000);};
