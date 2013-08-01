@@ -29,6 +29,7 @@ function record()
   document.body.appendChild(a);
   a.src = "dtmfmono48k.ogg";
   a.play();
+  a.onended = function () {alert("hihi");}
   setTimeout('record();', 1000);
 </script>
 </pre>
