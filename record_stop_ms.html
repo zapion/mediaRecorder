@@ -1,23 +1,32 @@
-<script>
-function ok(a, b) {
- alert(a + " " + b);
-}
-function startTest() {
-  navigator.mozGetUserMedia({audio:true,fake:true},
-                       function(s) {
+﻿<!DOCTYPE HTML>
+<html>
+<head>
+<title>Test MediaRecorder can't record the stopped media stream</title>
+</head>
+<body>
+<pre id="test">
+<script class="testbody" type="text/javascript">
+var mr;
+var passed = "truthy";
+var recordcount = 0;
+var a = document.createElement('audio');
 
-                         s.stop();
-                                                alert(s);
-                         mr = new MediaRecorder(s);
-                         try {
-                           mr.start(1000);
-                           ok(false, 'Can not record this mediastream');
-                         } catch (e) {
-                           ok(true, 'catch this bad behavior');
-                           SimpleTest.finish();
-                         }
-                       },
-                       function(e) {dump(e)});
+function dataavailable(e) {
+  ok(e.data.size > 0, "can get data from encoder");
 }
-startTest();
+
+//encoder only support 48k/16k mono audio channel
+  document.body.appendChild(a);
+  a.src = "dtmfmono48k.ogg";
+  stream = a.mozCaptureStreamUntilEnded();
+  a.onended = function() {
+    document.mr = new MediaRecorder(stream);
+    document.mr.ondataavailable = dataavailable;
+    document.mr.start(1000);
+    alert(document.mr.state);
+  }
+  a.play();
 </script>
+</pre>
+</body>
+</html>
