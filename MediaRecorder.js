@@ -90,6 +90,21 @@ function Start(time) {
   document.getElementById('status').value  = mMediaRecorder.state;
 }
 
+function Start0WithEvent() {
+  if (mMediaRecorder == null)
+    mMediaRecorder = new MediaRecorder(mMediaStream);
+  else if (mMediaRecorder.state != "inactive") {
+    alert("mMediaRecorder is not inactive, stop it first");
+    return;
+  }
+  mBlob = null;
+  mMediaRecorder.onstop = stopcb;
+  mMediaRecorder.ondataavailable = function(e) { mMediaRecorder.requestData(); dataavailablecb(e);}
+  mMediaRecorder.onerror = errorcb;
+  mMediaRecorder.start(0);
+  document.getElementById('status').value  = mMediaRecorder.state;
+}
+
 function Stop() {
   mMediaRecorder.stop();
 }
@@ -165,6 +180,7 @@ window.onload = function() {
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("Start0").onclick = function() { Start(0);};
+  document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
   document.getElementById("Stop").onclick = function() { Stop(); };
   document.getElementById("Stopms").onclick = function() { mMediaStream.stop(); };
   document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
