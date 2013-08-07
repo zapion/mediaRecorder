@@ -99,9 +99,13 @@ function Start0WithEvent() {
   }
   mBlob = null;
   mMediaRecorder.onstop = stopcb;
-  mMediaRecorder.ondataavailable = function(e) { mMediaRecorder.requestData(); dataavailablecb(e);}
+  mMediaRecorder.ondataavailable = function(e) {
+                                                mMediaRecorder.requestData();
+                                                dataavailablecb(e);
+                                                console.log(e);}
   mMediaRecorder.onerror = errorcb;
   mMediaRecorder.start(0);
+  mMediaRecorder.requestData();
   document.getElementById('status').value  = mMediaRecorder.state;
 }
 
