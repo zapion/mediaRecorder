@@ -22,6 +22,7 @@ var a = document.createElement('audio');
     document.mr.ondataavailable = function (e) { console.log("data avail + " + e.data.size); }
     document.mr.start();
   }
+  a.onended = function () { console.log ("onended..."); }
   a.src = "detodos.opus";
   a.play();
 </script>
