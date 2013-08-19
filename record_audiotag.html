@@ -17,13 +17,14 @@ var a = document.createElement('audio');
   document.body.appendChild(a);
   document.stream = a.mozCaptureStreamUntilEnded();
   a.oncanplaythrough = function () {
+    console.log("start record");
     document.mr = new MediaRecorder(document.stream);
     document.mr.onstop = function() { console.log("on stop..."); }
     document.mr.ondataavailable = function (e) { console.log("data avail + " + e.data.size); }
     document.mr.start();
   }
   a.onended = function () { console.log ("onended..."); }
-  a.src = "dtmfmono48k.ogg";
+  a.src = "detodos.opus";
   a.play();
 </script>
 </pre>
