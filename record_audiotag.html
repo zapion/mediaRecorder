@@ -13,24 +13,17 @@ var passed = "truthy";
 var recordcount = 0;
 var a = document.createElement('audio');
 
-function dataavailable(e) {
-alert("hihi");
-  ok(e.data.size > 0, "can get data from encoder");
-}
 
-function record()
-{
-    stream = a.mozCaptureStreamUntilEnded();
-    document.mr = new MediaRecorder(stream);
-    document.mr.ondataavailable = dataavailable;
-    document.mr.start(1000);
-}
-//encoder only support 48k/16k mono audio channel
   document.body.appendChild(a);
-  a.src = "dtmfmono48k.ogg";
+  document.stream = a.mozCaptureStreamUntilEnded();
+  a.oncanplaythrough = function () {
+    document.mr = new MediaRecorder(document.stream);
+    document.mr.onstop = function() { console.log("on stop..."); }
+    document.mr.ondataavailable = function (e) { console.log("data avail + " + e.data.size); }
+    document.mr.start();
+  }
+  a.src = "detodos.opus";
   a.play();
-  a.onended = function () {alert("hihi");}
-  setTimeout('record();', 1000);
 </script>
 </pre>
 </body>
