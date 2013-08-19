@@ -75,6 +75,16 @@ function getAudioTag() {
   audioout.play();
 }
 
+function getAudioTagNo() {
+  var a = document.getElementById('audioelem');
+  a.src = "big.wav";
+  audioout.mozSrcObject = a.mozCaptureStreamUntilEnded();
+  mMediaStream = a.mozCaptureStreamUntilEnded();
+  a.play();
+  document.body.appendChild(audioout);
+  audioout.play();
+}
+
 function Start(time) {
   if (mMediaRecorder == null)
     mMediaRecorder = new MediaRecorder(mMediaStream);
@@ -182,6 +192,7 @@ window.onload = function() {
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
   document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
+  document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
