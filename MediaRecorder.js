@@ -194,6 +194,7 @@ window.onload = function() {
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
   document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
   document.getElementById("Start").onclick = function() { Start(1000);};
+  document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
   document.getElementById("Stop").onclick = function() { Stop(); };

@@ -19,9 +19,11 @@ Record the audio Context
 
   mMediaRecorder = new MediaRecorder(dest.stream);
   mMediaRecorder.ondataavailable = function (e) {
-                                     mMediaRecorder.stop();
-                                     alert("test pass");
-                                   };
+                  console.log("on DATA " + e.data.size);
+  };
+  mMediaRecorder.onstop = function (e) {
+    console.log("on stop");
+  }
   mMediaRecorder.start(1000);
-
+  mMediaRecorder.stop();
 </script>
