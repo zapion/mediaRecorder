@@ -1,0 +1,32 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Media test: mediaRecorder</title>
+  <meta charset='utf-8'>
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<pre id="test">
+<script class="testbody" type="text/javascript">
+var mr;
+var passed = "truthy";
+var recordcount = 0;
+var a = document.createElement('video');
+var mBlob;
+
+  document.body.appendChild(a);
+  document.stream = a.mozCaptureStreamUntilEnded();
+  a.oncanplaythrough = function () {
+    console.log("start record");
+    document.mr = new MediaRecorder(document.stream);
+    document.mr.onstop = function() { console.log("on stop..."); }
+    document.mr.ondataavailable = function (e) { console.log("data avail + " + e.data.size);   mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'}); }
+    document.mr.start();
+  }
+  a.onended = function () { console.log ("onended..."); alert("mBlob size" = mBlob.size; }
+  a.src = "onepiece.webm";
+  a.play();
+</script>
+</pre>
+</body>
+</html>
