@@ -23,7 +23,7 @@ var mBlob;
     document.mr.ondataavailable = function (e) { console.log("data avail + " + e.data.size);   mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'}); }
     document.mr.start();
   }
-  a.onended = function () { console.log ("onended..."); alert("mBlob size" = mBlob.size; }
+  a.onended = function () { console.log ("onended..."); alert("mBlob size" + mBlob.size); }
   a.src = "onepiece.webm";
   a.play();
 </script>
