@@ -5,6 +5,7 @@ var mMediaRecorder2;
 var mBlob;
 var audioReplay = document.createElement('audio');
 var audioout = document.createElement('audio');
+var videoReplay;
 function gUM() {
   navigator.mozGetUserMedia({audio:true},
                        function(s) {
@@ -28,6 +29,18 @@ function gUM2() {
                        function(s) {
                          mMediaStream2 = s;
                          document.getElementById('mediastream').value  = mMediaStream2;
+                       },
+                       function(e) {dump(e)});
+}
+
+
+function gAVUM() {
+  navigator.mozGetUserMedia({audio:true, video:true},
+                       function(s) {
+                         mMediaStream = s;
+                         document.getElementById('mediastream').value  = mMediaStream;
+			 document.getElementById("videoelemsrc").mozSrcObject = mMediaStream;
+                         document.getElementById("videoelemsrc").play();
                        },
                        function(e) {dump(e)});
 }
@@ -186,6 +199,27 @@ function Save() {
         }
 }
 
+function binStringToHex3(s) {
+        var s2 = '', c;
+        for (var i = 0, l = s.length; i < l; ++i) {
+          c = s.charCodeAt(i);
+          s2 += (c >> 4).toString(16);
+          s2 += (c & 0xF).toString(16);
+        }
+        return s2;
+}
+
+function PlaybackVideo() {
+  _FReader = new FileReader();
+//bug...
+  _FReader.readAsDataURL(mBlob.slice(4,mBlob.size-4));
+  _FReader.onload = function (_FREvent) {
+    videoReplay.src = _FREvent.target.result;
+    videoReplay.play();
+  };
+}
+
+
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
@@ -205,4 +239,6 @@ window.onload = function() {
   document.getElementById("Save").onclick = function() { Save(); };
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
-};
+  document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
+  document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
+  videoReplay = document.getElementById("videoelem");};
