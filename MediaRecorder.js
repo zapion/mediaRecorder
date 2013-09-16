@@ -219,6 +219,13 @@ function PlaybackVideo() {
   };
 }
 
+function PlayVideo()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/onepiece.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
 
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
@@ -241,4 +248,5 @@ window.onload = function() {
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
+  document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
   videoReplay = document.getElementById("videoelem");};
