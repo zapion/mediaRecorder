@@ -45,6 +45,17 @@ function gAVUM() {
                        function(e) {dump(e)});
 }
 
+function gFakeAVUM() {
+  navigator.mozGetUserMedia({audio:true, video:true, fake:true},
+                       function(s) {
+                         mMediaStream = s;
+                         document.getElementById('mediastream').value  = mMediaStream;
+			 document.getElementById("videoelemsrc").mozSrcObject = mMediaStream;
+                         document.getElementById("videoelemsrc").play();
+                       },
+                       function(e) {dump(e)});
+}
+
 function dataavailablecb(aData) {
   mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
   document.getElementById('size').value  = mBlob.size;
@@ -247,6 +258,7 @@ window.onload = function() {
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
+  document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
   videoReplay = document.getElementById("videoelem");};
