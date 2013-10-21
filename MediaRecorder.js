@@ -105,6 +105,16 @@ function getAudioTag() {
   audioout.play();
 }
 
+function getAudioTag2ch() {
+  var a = document.getElementById('audioelem');
+  a.src = "ehren.opus";
+  audioout.mozSrcObject = a.mozCaptureStreamUntilEnded();
+  mMediaStream = a.mozCaptureStreamUntilEnded();
+  a.play();
+  document.body.appendChild(audioout);
+  audioout.play();
+}
+
 function getAudioTagNo() {
   var a = document.getElementById('audioelem');
   a.src = "big.wav";
@@ -265,6 +275,7 @@ window.onload = function() {
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
   document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
+  document.getElementById("getAudioTag2ch").onclick = function() { getAudioTag2ch();};
   document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
