@@ -3,6 +3,7 @@ var mMediaStream2;
 var mMediaRecorder;
 var mMediaRecorder2;
 var mBlob;
+var mBlob2;
 var audioReplay = document.createElement('audio');
 var audioout = document.createElement('audio');
 var videoReplay;
@@ -61,6 +62,11 @@ function dataavailablecb(aData) {
   document.getElementById('size').value  = mBlob.size;
 }
 
+function dataavailablecb2(aData) {
+  mBlob2 = new Blob([mBlob2, aData.data], {type: 'audio/ogg'});
+  document.getElementById('size2').value  = mBlob2.size;
+}
+
 function errorcb(e) {
   alert(e);
 }
@@ -99,6 +105,16 @@ function getAudioTag() {
   audioout.play();
 }
 
+function getAudioTag2ch() {
+  var a = document.getElementById('audioelem');
+  a.src = "ehren.opus";
+  audioout.mozSrcObject = a.mozCaptureStreamUntilEnded();
+  mMediaStream = a.mozCaptureStreamUntilEnded();
+  a.play();
+  document.body.appendChild(audioout);
+  audioout.play();
+}
+
 function getAudioTagNo() {
   var a = document.getElementById('audioelem');
   a.src = "big.wav";
@@ -122,6 +138,21 @@ function Start(time) {
   mMediaRecorder.onerror = errorcb;
   mMediaRecorder.start(time);
   document.getElementById('status').value  = mMediaRecorder.state;
+}
+
+function StartI2(time) {
+  if (mMediaRecorder2 == null)
+    mMediaRecorder2 = new MediaRecorder(mMediaStream);
+  else if (mMediaRecorder2.state != "inactive") {
+    alert("mMediaRecorder is not inactive, stop it first");
+    return;
+  }
+  mBlob2 = null;
+  mMediaRecorder2.onstop = stopcb;
+  mMediaRecorder2.ondataavailable = dataavailablecb2;
+  mMediaRecorder2.onerror = errorcb;
+  mMediaRecorder2.start(time);
+//  document.getElementById('status').value  = mMediaRecorder.state;
 }
 
 function Start0WithEvent() {
@@ -252,6 +283,7 @@ window.onload = function() {
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
   document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
+  document.getElementById("getAudioTag2ch").onclick = function() { getAudioTag2ch();};
   document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
