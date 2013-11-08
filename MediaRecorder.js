@@ -238,6 +238,14 @@ function PlayVideo()
   mMediaRecorder = null;
 }
 
+function PlayVideo()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/big-buck-bunny_trailer.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
@@ -261,4 +269,5 @@ window.onload = function() {
   document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
+  document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   videoReplay = document.getElementById("videoelem");};
