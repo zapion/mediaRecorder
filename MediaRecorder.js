@@ -271,7 +271,7 @@ function PlayVideo()
 
 function PlayVideo2()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/big-buck-bunny_trailer.mp4';
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/synctest.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
