@@ -201,11 +201,13 @@ function Start0WithEvent() {
 
 function Stop() {
   mMediaRecorder.stop();
+}
+
+function stopms() {
   audioout.stop();
   var elem = document.getElementById('audioelem');
   elem.stop();
 }
-
 function Resume() {
   mMediaRecorder.resume();
   document.getElementById('status').value  = mMediaRecorder.state;
@@ -319,7 +321,7 @@ window.onload = function() {
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
   document.getElementById("Stop").onclick = function() { Stop(); };
-  document.getElementById("Stopms").onclick = function() { Stop(); };
+  document.getElementById("Stopms").onclick = function() { stopms(); };
   document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
   document.getElementById("Resume").onclick = function() { Resume(); };
   document.getElementById("Pause").onclick = function() { Pause(); };
