@@ -67,6 +67,12 @@ function dataavailablecb2(aData) {
   document.getElementById('size2').value  = mBlob2.size;
 }
 
+function SaveBlob() {
+  var iframe = document.createElement('iframe');
+  document.body.appendChild(iframe);
+  var blob = new Blob([mBlob], {type: "application/octet-stream"});
+  iframe.src = window.URL.createObjectURL(blob);
+}
 function errorcb(e) {
   alert(e);
 }
@@ -326,6 +332,7 @@ window.onload = function() {
   document.getElementById("Resume").onclick = function() { Resume(); };
   document.getElementById("Pause").onclick = function() { Pause(); };
   document.getElementById("Save").onclick = function() { Save(); };
+  document.getElementById("SaveBlob").onclick = function() { SaveBlob(); };
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
