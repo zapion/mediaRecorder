@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+function boom()
+{
+  var ac = new AudioContext();
+  var source = ac.createMediaElementSource(document.createElement("audio"));
+  var dest = ac.createMediaStreamDestination();
+  source.connect(dest, 0, 0);
+  dest.channelCount = 3;
+  source.channelCountMode = 'explicit';
+  var mr = new MediaRecorder(dest.stream);
+  dump(mr);
+  mr.onerror = function (e) { dump(e); dump(e.name); }
+  mr.start(0);
+}
+
+</script>
+</head>
+<body onload="boom();"></body>
+</html>
