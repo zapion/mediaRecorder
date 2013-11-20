@@ -95,6 +95,31 @@ function getAudioContext() {
 
 }
 
+function get4chAudioContext() {
+  var context = new AudioContext();
+  var buffer = context.createBuffer(4, 409600, context.sampleRate);
+  for (var i = 0; i < 409600; ++i) {
+    buffer.getChannelData(0)[i] = Math.sin(1000 * 2 * Math.PI * i / context.sampleRate);
+    buffer.getChannelData(1)[i] = Math.sin(1000 * 2 * Math.PI * i / context.sampleRate);
+    buffer.getChannelData(2)[i] = Math.sin(1000 * 2 * Math.PI * i / context.sampleRate);
+    buffer.getChannelData(3)[i] = Math.sin(1000 * 2 * Math.PI * i / context.sampleRate);
+  }
+
+  var source = context.createBufferSource();
+  source.buffer = buffer;
+
+  var dest = context.createMediaStreamDestination();
+  dest.channelCount = 4;
+  source.channelCountMode = 'explicit';
+  source.connect(dest);
+  var elem = document.getElementById('audioelem');
+  elem.mozSrcObject = dest.stream;
+  mMediaStream = dest.stream;
+  source.start(0);
+  elem.play();
+
+}
+
 function getAudioTag() {
   var a = document.getElementById('audioelem');
   a.src = "dtmfmono48k.ogg";
@@ -178,6 +203,11 @@ function Stop() {
   mMediaRecorder.stop();
 }
 
+function stopms() {
+  audioout.stop();
+  var elem = document.getElementById('audioelem');
+  elem.stop();
+}
 function Resume() {
   mMediaRecorder.resume();
   document.getElementById('status').value  = mMediaRecorder.state;
@@ -269,11 +299,20 @@ function PlayVideo()
   mMediaRecorder = null;
 }
 
+function PlayVideo2()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/synctest.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
   document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
+  document.getElementById("get4chAudioContext").onclick = function() { get4chAudioContext();};
   document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
   document.getElementById("getAudioTag2ch").onclick = function() { getAudioTag2ch();};
   document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
@@ -282,7 +321,7 @@ window.onload = function() {
   document.getElementById("Start0").onclick = function() { Start(0);};
   document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
   document.getElementById("Stop").onclick = function() { Stop(); };
-  document.getElementById("Stopms").onclick = function() { mMediaStream.stop(); };
+  document.getElementById("Stopms").onclick = function() { stopms(); };
   document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
   document.getElementById("Resume").onclick = function() { Resume(); };
   document.getElementById("Pause").onclick = function() { Pause(); };
@@ -293,4 +332,5 @@ window.onload = function() {
   document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
+  document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   videoReplay = document.getElementById("videoelem");};
