@@ -46,6 +46,17 @@ function gAVUM() {
                        function(e) {dump(e)});
 }
 
+function gVUM() {
+  navigator.mozGetUserMedia({audio:false, video:true},
+                       function(s) {
+                         mMediaStream = s;
+                         document.getElementById('mediastream').value  = mMediaStream;
+			 document.getElementById("videoelemsrc").mozSrcObject = mMediaStream;
+                         document.getElementById("videoelemsrc").play();
+                       },
+                       function(e) {dump(e)});
+}
+
 function gFakeAVUM() {
   navigator.mozGetUserMedia({audio:true, video:true, fake:true},
                        function(s) {
@@ -336,6 +347,7 @@ window.onload = function() {
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
+  document.getElementById("getVUserMedia").onclick = function() { gVUM();};
   document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
