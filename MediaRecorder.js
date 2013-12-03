@@ -325,58 +325,31 @@ function PlayVideo2()
 }
 
 window.onload = function() {
-  if (document.getElementById("getUserMedia"))
-    document.getElementById("getUserMedia").onclick = function() { gUM();};
-  if (document.getElementById("getUserMedia2"))
-    document.getElementById("getUserMedia2").onclick = function() { gUM2();};
-  if (document.getElementById("getFakeUserMedia"))
-    document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
-  if (document.getElementById("getAudioContext"))
-    document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
-  if (document.getElementById("get4chAudioContext"))
-    document.getElementById("get4chAudioContext").onclick = function() { get4chAudioContext();};
-  if (document.getElementById("getAudioTag"))
-    document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
-  if (document.getElementById("getAudioTag2ch"))
-    document.getElementById("getAudioTag2ch").onclick = function() { getAudioTag2ch();};
-  if (document.getElementById("getAudioTagNo"))
-    document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
-  if (document.getElementById("Start"))
-    document.getElementById("Start").onclick = function() { Start(1000);};
-  if (document.getElementById("SetNull"))
-    document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
-  if (document.getElementById("Start0"))
-    document.getElementById("Start0").onclick = function() { Start(0);};
-  if (document.getElementById("Start0WithEvent"))
-    document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
-  if (document.getElementById("Stop"))
-    document.getElementById("Stop").onclick = function() { Stop(); };
-  if (document.getElementById("Stopms"))
-    document.getElementById("Stopms").onclick = function() { stopms(); };
-  if (document.getElementById("requestData"))
-    document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
-  if (document.getElementById("Resume"))
-    document.getElementById("Resume").onclick = function() { Resume(); };
-  if (document.getElementById("Pause"))
-    document.getElementById("Pause").onclick = function() { Pause(); };
-  if (document.getElementById("Save"))
-    document.getElementById("Save").onclick = function() { Save(); };
-  if (document.getElementById("SaveBlob"))
-    document.getElementById("SaveBlob").onclick = function() { SaveBlob(); };
-  if (document.getElementById("Playback"))
-    document.getElementById("Playback").onclick = function() { Playback(); };
-  if (document.getElementById("PlaybackIDX"))
-    document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
-  if (document.getElementById("getAVUserMedia"))
-    document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
-  if (document.getElementById("getVUserMedia"))
-    document.getElementById("getVUserMedia").onclick = function() { gVUM();};
-  if (document.getElementById("getFakeAVUserMedia"))
-    document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
-  if (document.getElementById("PlaybackVideo"))
-    document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
-  if (document.getElementById("PlayVideo"))
-    document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
-  if (document.getElementById("PlayVideo2"))
-    document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
+  document.getElementById("getUserMedia").onclick = function() { gUM();};
+  document.getElementById("getUserMedia2").onclick = function() { gUM2();};
+  document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
+  document.getElementById("getAudioContext").onclick = function() { getAudioContext();};
+  document.getElementById("get4chAudioContext").onclick = function() { get4chAudioContext();};
+  document.getElementById("getAudioTag").onclick = function() { getAudioTag();};
+  document.getElementById("getAudioTag2ch").onclick = function() { getAudioTag2ch();};
+  document.getElementById("getAudioTagNo").onclick = function() { getAudioTagNo();};
+  document.getElementById("Start").onclick = function() { Start(1000);};
+  document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
+  document.getElementById("Start0").onclick = function() { Start(0);};
+  document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
+  document.getElementById("Stop").onclick = function() { Stop(); };
+  document.getElementById("Stopms").onclick = function() { stopms(); };
+  document.getElementById("requestData").onclick = function() { mMediaRecorder.requestData(); };
+  document.getElementById("Resume").onclick = function() { Resume(); };
+  document.getElementById("Pause").onclick = function() { Pause(); };
+  document.getElementById("Save").onclick = function() { Save(); };
+  document.getElementById("SaveBlob").onclick = function() { SaveBlob(); };
+  document.getElementById("Playback").onclick = function() { Playback(); };
+  document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
+  document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
+  document.getElementById("getVUserMedia").onclick = function() { gVUM();};
+  document.getElementById("getFakeAVUserMedia").onclick = function() { gFakeAVUM();};
+  document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
+  document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
+  document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   videoReplay = document.getElementById("videoelem");};
