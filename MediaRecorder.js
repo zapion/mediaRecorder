@@ -81,7 +81,8 @@ function dataavailablecb2(aData) {
 function SaveBlob() {
   var iframe = document.createElement('iframe');
   document.body.appendChild(iframe);
-  var blob = new Blob([mBlob], {type: "application/octet-stream"});
+  // remove the first 'null' byte
+  var blob = new Blob([mBlob.slice(4)], {type: "application/octet-stream"});
   iframe.src = window.URL.createObjectURL(blob);
 }
 function errorcb(e) {
