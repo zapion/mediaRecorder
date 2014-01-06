@@ -70,9 +70,9 @@ function gFakeAVUM() {
 
 function dataavailablecb(aData) {
   if (mBlob) {
-    mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
+    mBlob = new Blob([mBlob, aData.data], {type: aData.data.type});
   } else {
-    mBlob = new Blob([aData.data], {type: 'audio/ogg'});
+    mBlob = new Blob([aData.data], {type: aData.data.type});
   }
   document.getElementById('size').value  = mBlob.size;
 }
@@ -92,10 +92,11 @@ function SaveBlob() {
     downloadLink.download = "data.mp4";
   } else if (mBlob.type === 'video/webm') {
     downloadLink.download = "data.webm";
+  } else {
+    downloadLink.download = "data.bin";
   }
   document.body.appendChild(downloadLink);
   downloadLink.click();
-  alert("download ok");
   document.body.removeChild(downloadLink);
 }
 function errorcb(e) {
