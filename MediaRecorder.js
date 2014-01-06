@@ -348,7 +348,7 @@ function PlayVideo2()
 
 function PlayVideo3()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/gizmo.mp4';
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/vp9cake.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
