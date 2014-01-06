@@ -382,4 +382,5 @@ window.onload = function() {
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
   document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
+  document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
   videoReplay = document.getElementById("videoelem");};
