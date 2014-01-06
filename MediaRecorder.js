@@ -69,7 +69,11 @@ function gFakeAVUM() {
 }
 
 function dataavailablecb(aData) {
-  mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
+  if (mBlob) {
+    mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
+  } else {
+    mBlob = new Blob([aData.data], {type: 'audio/ogg'});
+  }
   document.getElementById('size').value  = mBlob.size;
 }
 
@@ -79,10 +83,19 @@ function dataavailablecb2(aData) {
 }
 
 function SaveBlob() {
-  var iframe = document.createElement('iframe');
-  document.body.appendChild(iframe);
+  var downloadLink = document.createElement("a");
   var blob = new Blob([mBlob], {type: "application/octet-stream"});
-  iframe.src = window.URL.createObjectURL(blob);
+  downloadLink.href = window.URL.createObjectURL(blob);
+  if (mBlob.type === 'audio/ogg') {
+    downloadLink.download = "data.opus";
+  } else if (mBlob.type === 'video/mp4') {
+    downloadLink.download = "data.mp4";
+  } else if (mBlob.type === 'video/webm') {
+    downloadLink.download = "data.webm";
+  }
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
 }
 function errorcb(e) {
   alert(e);
