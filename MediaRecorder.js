@@ -221,9 +221,16 @@ function Stop() {
 }
 
 function stopms() {
-  audioout.stop();
+  if (audioout.stop)
+    audioout.stop();
   var elem = document.getElementById('audioelem');
-  elem.stop();
+  if (elem.stop)
+    elem.stop();
+  if (mMediaStream && mMediaStream.stop) {
+    mMediaStream.stop();
+    mMediaStream = null;
+  }
+  document.getElementById('mediastream').value  = mMediaStream;
 }
 function Resume() {
   mMediaRecorder.resume();
