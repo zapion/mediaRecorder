@@ -95,6 +95,7 @@ function SaveBlob() {
   }
   document.body.appendChild(downloadLink);
   downloadLink.click();
+  alert("download ok");
   document.body.removeChild(downloadLink);
 }
 function errorcb(e) {
