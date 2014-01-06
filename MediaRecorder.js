@@ -346,6 +346,14 @@ function PlayVideo2()
   mMediaRecorder = null;
 }
 
+function PlayVideo3()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/gizmo.mp4';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 window.onload = function() {
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
