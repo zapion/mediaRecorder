@@ -82,6 +82,11 @@ function dataavailablecb2(aData) {
   document.getElementById('size2').value  = mBlob2.size;
 }
 
+function done() {
+  dump("done");
+};
+
+var pendingStorageWrites;
 function saveToStorage(blob, storage, filename, partInfo, isRetry) {
     pendingStorageWrites++;
     var dstorage = navigator.getDeviceStorage(storage);
