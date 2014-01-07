@@ -21,6 +21,15 @@
   document.body.appendChild(opusAudioOutput);
 
 
+  var play= document.createElement('input');
+  play.setAttribute('type', 'submit');
+  play.setAttribute('value', 'Start play');
+  document.body.appendChild(play);
+  play.onclick = function() {
+    opusAudioInput.play();
+    opusAudioOutput.play();
+  };
+
   var startRecording = document.createElement('input');
   startRecording.setAttribute('type', 'submit');
   startRecording.setAttribute('value', 'Start Recording');
