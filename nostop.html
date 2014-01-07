@@ -16,8 +16,7 @@
   opusAudioOutput.setAttribute('controls', 'controls');
 
   opusAudioInput.src = 'dtmfmono48k.ogg';
-//  opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
-  opusAudioOutput.src = 'dtmfmono48k.ogg';
+  opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
   document.body.appendChild(opusAudioInput);
   document.body.appendChild(opusAudioOutput);
 
@@ -28,7 +27,7 @@
   document.body.appendChild(startRecording);
   var mr;
   startRecording.onclick = function() {
-    mr = new MediaRecorder(opusAudioOutput.mozCaptureStreamUntilEnded());
+    mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
     mr.start(1000);
     mr.onstop = function(e) {alert(e);}
   };
