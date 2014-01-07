@@ -30,6 +30,19 @@
     opusAudioOutput.play();
   };
 
+  var play2 = document.createElement('input');
+  play2.setAttribute('type', 'submit');
+  play2.setAttribute('value', 'Start play2');
+  document.body.appendChild(play2);
+  play2.onclick = function() {
+    opusAudioInput = document.createElement('audio');
+    opusAudioInput.src = "dtmfmono48k.ogg";
+    opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
+    opusAudioInput.play();
+    document.body.appendChild(opusAudioOutput);
+    opusAudioOutput.play();
+  };
+
   var startRecording = document.createElement('input');
   startRecording.setAttribute('type', 'submit');
   startRecording.setAttribute('value', 'Start Recording');
