@@ -26,10 +26,13 @@
   startRecording.setAttribute('type', 'submit');
   startRecording.setAttribute('value', 'Start Recording');
   document.body.appendChild(startRecording);
+  var mr;
   startRecording.onclick = function() {
-    var mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
+    mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
     mr.start(1000);
+    mr.onstop = function(e) {alert(e);}
   };
+
 </script>
 </pre>
 </body>
