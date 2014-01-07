@@ -28,7 +28,7 @@
   document.body.appendChild(startRecording);
   var mr;
   startRecording.onclick = function() {
-    mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
+    mr = new MediaRecorder(opusAudioOutput.mozCaptureStreamUntilEnded());
     mr.start(1000);
     mr.onstop = function(e) {alert(e);}
   };
