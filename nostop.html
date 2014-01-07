@@ -50,8 +50,8 @@
   var mr;
   startRecording.onclick = function() {
     mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
-    mr.start(1000);
     mr.onstop = function(e) {alert(e);}
+    mr.start(1000);
   };
 
 </script>
