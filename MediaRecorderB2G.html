@@ -18,9 +18,13 @@
   </head>
     <script type="text/javascript" src="MediaRecorder.js"></script>
   <body>
+    <button id="install">installApp</button><br>
     <audio id="audioelem"></audio>
 getMediaStream From<br>
-    <button id = 'getUserMedia'>GetUserMedia1</button>
+    <button id = 'getUserMedia'>GUM_A</button>
+    <button id = 'getAVUserMedia'>GUM_AV</button> <Br>
+    <button id = 'getVUserMedia'>GUM_V</button>
+    <button id = 'getFakeAVUserMedia'>GUM_AVF</button> <br>
     <button id = 'getUserMedia2' hidden= true>GetUserMedia2</button>
     <button id = 'getFakeUserMedia' hidden= true>GetFakeUserMedia</button>
     <button id = 'getAudioContext' hidden= true>GetAudioContext</button>
@@ -46,16 +50,12 @@ MediaRecorder Function<br>
     Blob Size2<INPUT id='size2' SIZE=4 value = 0 hidden= true><br>
     Recorder status<INPUT id='status' SIZE=4 value = ''><p>
 Playback Recording<br>
-    <button id = 'Playback'>PlayBackFromMemory</button> <br>
+    <button id = 'Playback'>PlayAudRec</button> <br>
     <button id = 'PlaybackIDX' hidden= true>PlayBackFromIndexDB</button><br>
----- Video function --- <br>
-    <button id = 'getAVUserMedia'>GetAVUserMedia</button> <Br>
-    <button id = 'getVUserMedia'>GetVideoUserMedia</button> <br>
-    <button id = 'getFakeAVUserMedia'>GetFakeAVUserMedia</button> <br>
     <button id = 'PlayVideo' hidden= true>PlayVideoFromFile</button>
     <button id = 'PlayVideo2' hidden= true>PlayVideoFromFile2</button>
-    <button id = 'PlayVideo3'>PlayVP9Video</button>
-    <button id = 'PlaybackVideo' >PlayVideoBackFromMemory</button><br>
+    <button id = 'PlayVideo3' hidden= true>PlayVP9Video</button>
+    <button id = 'PlaybackVideo' >PlayVidRec</button><br>
     <video id="videoelemsrc" width="640" height="480"></video>
     <video id="videoelem" width="640" height="480"></video>
   </body>

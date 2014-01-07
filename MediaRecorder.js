@@ -354,7 +354,19 @@ function PlayVideo3()
   mMediaRecorder = null;
 }
 
+function installHostedApp() {
+  var request = navigator.mozApps.install('https://rawgithub.com/randylin/mediaRecorder/master/manifest.webapp');
+
+  request.onsuccess = function(e) {
+    console.log('Installed successfully');
+  };
+
+  request.onerror = function(err) {
+    console.log('Error: ' + err.target.error.name);
+  };
+}
 window.onload = function() {
+  document.getElementById("install").onclick = function() { installHostedApp();};
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
