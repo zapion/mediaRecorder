@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <title>Media test: mediaRecorder</title>
+  <meta charset='utf-8'>
+  <script type="text/javascript" src="manifest.js"></script>
+</head>
+<body>
+<pre id="test">
+<script class="testbody" type="text/javascript">
+
+  var opusAudioInput = document.createElement('audio');
+  opusAudioInput.setAttribute('controls', 'controls');
+
+  var opusAudioOutput = document.createElement('audio');
+  opusAudioOutput.setAttribute('controls', 'controls');
+
+  opusAudioInput.src = 'dtmfmono48k.ogg';
+  opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
+
+  document.body.appendChild(opusAudioInput);
+  document.body.appendChild(opusAudioOutput);
+
+
+  var startRecording = document.createElement('input');
+  startRecording.setAttribute('type', 'submit');
+  startRecording.setAttribute('value', 'Start Recording');
+  document.body.appendChild(startRecording);
+  startRecording.onclick = function() {
+    var mr = new MediaRecorder(opusAudioInput.mozCaptureStreamUntilEnded());
+    mr.start(1000);
+  };
+</script>
+</pre>
+</body>
+</html>
