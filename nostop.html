@@ -16,8 +16,8 @@
   opusAudioOutput.setAttribute('controls', 'controls');
 
   opusAudioInput.src = 'dtmfmono48k.ogg';
-  opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
-
+//  opusAudioOutput.mozSrcObject = opusAudioInput.mozCaptureStreamUntilEnded();
+  opusAudioOutput.src = 'dtmfmono48k.ogg';
   document.body.appendChild(opusAudioInput);
   document.body.appendChild(opusAudioOutput);
 
