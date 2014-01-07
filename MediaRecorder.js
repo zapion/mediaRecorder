@@ -82,6 +82,54 @@ function dataavailablecb2(aData) {
   document.getElementById('size2').value  = mBlob2.size;
 }
 
+function saveToStorage(blob, storage, filename, partInfo, isRetry) {
+    pendingStorageWrites++;
+    var dstorage = navigator.getDeviceStorage(storage);
+    var req = dstorage.delete(filename);
+    req = dstorage.addNamed(blob, filename);
+    req.onerror = function() {
+      console.warn('failed to save attachment to', storage, filename,
+                   'type:', blob.type);
+      pendingStorageWrites--;
+      // if we failed to unique the file after appending junk, just give up
+      if (isRetry) {
+        if (pendingStorageWrites === 0)
+          done();
+        return;
+      }
+      // retry by appending a super huge timestamp to the file before its
+      // extension.
+      var idxLastPeriod = filename.lastIndexOf('.');
+      if (idxLastPeriod === -1)
+        idxLastPeriod = filename.length;
+      filename = filename.substring(0, idxLastPeriod) + '-' + Date.now() +
+                   filename.substring(idxLastPeriod);
+      saveToStorage(blob, storage, filename, partInfo, true);
+    };
+    req.onsuccess = function() {
+      console.log('saved attachment to', storage, filename, 'type:', blob.type);
+      partInfo.file = [storage, filename];
+      if (--pendingStorageWrites === 0)
+        done();
+    };
+}
+
+function SaveBlobSD() {
+  var fname;
+  if (mBlob.type === 'audio/ogg') {
+    fname = "data.opus";
+  } else if (mBlob.type === 'video/mp4') {
+    fname = "data.mp4";
+  } else if (mBlob.type === 'video/webm') {
+    fname = "data.webm";
+  } else {
+    fname = "data.bin";
+  }
+
+  dump("save " + mBlob.size);
+  saveToStorage(mBlob, "music", fname, "abc", 1);
+}
+
 function SaveBlob() {
   var downloadLink = document.createElement("a");
   var blob = new Blob([mBlob], {type: "application/octet-stream"});
@@ -99,6 +147,7 @@ function SaveBlob() {
   downloadLink.click();
   document.body.removeChild(downloadLink);
 }
+
 function errorcb(e) {
   alert(e);
 }
@@ -386,6 +435,7 @@ window.onload = function() {
   document.getElementById("Pause").onclick = function() { Pause(); };
   document.getElementById("Save").onclick = function() { Save(); };
   document.getElementById("SaveBlob").onclick = function() { SaveBlob(); };
+  document.getElementById("SaveBlobSD").onclick = function() { SaveBlobSD(); };
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
