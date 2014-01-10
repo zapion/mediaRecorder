@@ -408,6 +408,14 @@ function PlayVideo3()
   mMediaRecorder = null;
 }
 
+function PlayVideo4()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/720p.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 function installHostedApp() {
   var request = navigator.mozApps.install('https://rawgithub.com/randylin/mediaRecorder/master/manifest.webapp');
 
@@ -450,4 +458,5 @@ window.onload = function() {
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
   document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
+  document.getElementById("PlayVideo4").onclick = function() { PlayVideo4(); };
   videoReplay = document.getElementById("videoelem");};
