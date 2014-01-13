@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script>
+
+function boom()
+{
+    var ac = new window.AudioContext();
+    var dest = ac.createMediaStreamDestination();
+    var stream = dest.stream;
+
+    setTimeout(function() {
+        var recorder = new MediaRecorder(stream);
+        recorder.start(0);
+        recorder.requestData();
+        recorder.stop();
+    }, 100);
+}
+
+</script>
+</head>
+<body onload="boom();"></body>
+</html>
+
