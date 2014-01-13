@@ -17,6 +17,8 @@
   </head>
     <script type="text/javascript" src="MediaRecorder.js"></script>
   <body>
+    <button id="install" hidden= true>installApp</button>
+    <a href="MediaRecorderB2G.html">==GOTOB2G==</a><br>
     <audio id="audioelem"></audio>
 getMediaStream From<br>
     <button id = 'getUserMedia'>GetUserMedia1</button>
@@ -41,6 +43,7 @@ MediaRecorder Function<br>
     <button id = 'Start0WithEvent'>Start(0)WithRequestData</button>
     <button id = 'Save'>SaveToIndexDB</button><br>
     <button id = 'SaveBlob'>SaveBlob</button><br>
+    <button id = 'SaveBlobSD' hidden= true>SaveBlobSD</button><br>
     Blob Size<INPUT id='size' SIZE=4 value = 0>
     Blob Size2<INPUT id='size2' SIZE=4 value = 0>
     Recorder status<INPUT id='status' SIZE=4 value = ''><p>
@@ -53,6 +56,8 @@ Playback Recording<br>
     <button id = 'getFakeAVUserMedia'>GetFakeAVUserMedia</button>
     <button id = 'PlayVideo'>PlayVideoFromFile</button>
     <button id = 'PlayVideo2'>PlayVideoFromFile2</button>
+    <button id = 'PlayVideo3'>PlayVP9Video</button>
+    <button id = 'PlayVideo4'>Play720pWebM</button>
     <button id = 'PlaybackVideo'>PlayVideoBackFromMemory</button><br>
     <video id="videoelemsrc" width="640" height="480"></video>
     <video id="videoelem" width="640" height="480"></video>

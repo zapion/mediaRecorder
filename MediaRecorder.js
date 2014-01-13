@@ -69,7 +69,11 @@ function gFakeAVUM() {
 }
 
 function dataavailablecb(aData) {
-  mBlob = new Blob([mBlob, aData.data], {type: 'audio/ogg'});
+  if (mBlob) {
+    mBlob = new Blob([mBlob, aData.data], {type: aData.data.type});
+  } else {
+    mBlob = new Blob([aData.data], {type: aData.data.type});
+  }
   document.getElementById('size').value  = mBlob.size;
 }
 
@@ -78,12 +82,77 @@ function dataavailablecb2(aData) {
   document.getElementById('size2').value  = mBlob2.size;
 }
 
-function SaveBlob() {
-  var iframe = document.createElement('iframe');
-  document.body.appendChild(iframe);
-  var blob = new Blob([mBlob], {type: "application/octet-stream"});
-  iframe.src = window.URL.createObjectURL(blob);
+function done() {
+  dump("done");
+};
+
+var pendingStorageWrites;
+function saveToStorage(blob, storage, filename, partInfo, isRetry) {
+    pendingStorageWrites++;
+    var dstorage = navigator.getDeviceStorage(storage);
+    var req = dstorage.delete(filename);
+    req = dstorage.addNamed(blob, filename);
+    req.onerror = function() {
+      console.warn('failed to save attachment to', storage, filename,
+                   'type:', blob.type);
+      pendingStorageWrites--;
+      // if we failed to unique the file after appending junk, just give up
+      if (isRetry) {
+        if (pendingStorageWrites === 0)
+          done();
+        return;
+      }
+      // retry by appending a super huge timestamp to the file before its
+      // extension.
+      var idxLastPeriod = filename.lastIndexOf('.');
+      if (idxLastPeriod === -1)
+        idxLastPeriod = filename.length;
+      filename = filename.substring(0, idxLastPeriod) + '-' + Date.now() +
+                   filename.substring(idxLastPeriod);
+      saveToStorage(blob, storage, filename, partInfo, true);
+    };
+    req.onsuccess = function() {
+      console.log('saved attachment to', storage, filename, 'type:', blob.type);
+      partInfo.file = [storage, filename];
+      if (--pendingStorageWrites === 0)
+        done();
+    };
 }
+
+function SaveBlobSD() {
+  var fname;
+  if (mBlob.type === 'audio/ogg') {
+    fname = "data.opus";
+  } else if (mBlob.type === 'video/mp4') {
+    fname = "data.mp4";
+  } else if (mBlob.type === 'video/webm') {
+    fname = "data.webm";
+  } else {
+    fname = "data.bin";
+  }
+
+  dump("save " + mBlob.size);
+  saveToStorage(mBlob, "music", fname, "abc", 1);
+}
+
+function SaveBlob() {
+  var downloadLink = document.createElement("a");
+  var blob = new Blob([mBlob], {type: "application/octet-stream"});
+  downloadLink.href = window.URL.createObjectURL(blob);
+  if (mBlob.type === 'audio/ogg') {
+    downloadLink.download = "data.opus";
+  } else if (mBlob.type === 'video/mp4') {
+    downloadLink.download = "data.mp4";
+  } else if (mBlob.type === 'video/webm') {
+    downloadLink.download = "data.webm";
+  } else {
+    downloadLink.download = "data.bin";
+  }
+  document.body.appendChild(downloadLink);
+  downloadLink.click();
+  document.body.removeChild(downloadLink);
+}
+
 function errorcb(e) {
   alert(e);
 }
@@ -221,9 +290,16 @@ function Stop() {
 }
 
 function stopms() {
-  audioout.stop();
+  if (audioout.stop)
+    audioout.stop();
   var elem = document.getElementById('audioelem');
-  elem.stop();
+  if (elem.stop)
+    elem.stop();
+  if (mMediaStream && mMediaStream.stop) {
+    mMediaStream.stop();
+    mMediaStream = null;
+  }
+  document.getElementById('mediastream').value  = mMediaStream;
 }
 function Resume() {
   mMediaRecorder.resume();
@@ -301,7 +377,7 @@ function binStringToHex3(s) {
 function PlaybackVideo() {
   _FReader = new FileReader();
 //bug...
-  _FReader.readAsDataURL(mBlob.slice(4,mBlob.size-4));
+  _FReader.readAsDataURL(mBlob);
   _FReader.onload = function (_FREvent) {
     videoReplay.src = _FREvent.target.result;
     videoReplay.play();
@@ -324,7 +400,35 @@ function PlayVideo2()
   mMediaRecorder = null;
 }
 
+function PlayVideo3()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/vp9cake.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
+function PlayVideo4()
+{
+  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/720p.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
+function installHostedApp() {
+  var request = navigator.mozApps.install('https://rawgithub.com/randylin/mediaRecorder/master/manifest.webapp');
+
+  request.onsuccess = function(e) {
+    console.log('Installed successfully');
+  };
+
+  request.onerror = function(err) {
+    console.log('Error: ' + err.target.error.name);
+  };
+}
 window.onload = function() {
+  document.getElementById("install").onclick = function() { installHostedApp();};
   document.getElementById("getUserMedia").onclick = function() { gUM();};
   document.getElementById("getUserMedia2").onclick = function() { gUM2();};
   document.getElementById("getFakeUserMedia").onclick = function() { gFakeGUM();};
@@ -344,6 +448,7 @@ window.onload = function() {
   document.getElementById("Pause").onclick = function() { Pause(); };
   document.getElementById("Save").onclick = function() { Save(); };
   document.getElementById("SaveBlob").onclick = function() { SaveBlob(); };
+  document.getElementById("SaveBlobSD").onclick = function() { SaveBlobSD(); };
   document.getElementById("Playback").onclick = function() { Playback(); };
   document.getElementById("PlaybackIDX").onclick = function() { PlaybackIDX(); };
   document.getElementById("getAVUserMedia").onclick = function() { gAVUM();};
@@ -352,4 +457,6 @@ window.onload = function() {
   document.getElementById("PlaybackVideo").onclick = function() { PlaybackVideo(); };
   document.getElementById("PlayVideo").onclick = function() { PlayVideo(); };
   document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
+  document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
+  document.getElementById("PlayVideo4").onclick = function() { PlayVideo4(); };
   videoReplay = document.getElementById("videoelem");};

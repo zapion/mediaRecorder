@@ -1,0 +1,15 @@
+{
+  "version": "1.0",
+  "name": "Record",
+  "description": "Web app Record",
+  "launch_path": "MediaRecorderB2G.html",
+  "developer": {
+    "name": "The Gaia Team",
+    "url": "https://github.com/mozilla-b2g/gaia"
+  },
+  "type": "privileged",
+  "permissions": {
+    "audio-capture": {},
+    "device-storage:music":{ "access": "readcreate" }
+  }
+}

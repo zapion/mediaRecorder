@@ -18,9 +18,13 @@
   </head>
     <script type="text/javascript" src="MediaRecorder.js"></script>
   <body>
+    <button id="install" hidden=true>installApp</button><br>
     <audio id="audioelem"></audio>
 getMediaStream From<br>
-    <button id = 'getUserMedia'>GetUserMedia1</button>
+    <button id = 'getUserMedia'>GUM_A</button>
+    <button id = 'getAVUserMedia'>GUM_AV</button> <Br>
+    <button id = 'getVUserMedia'>GUM_V</button>
+    <button id = 'getFakeAVUserMedia'>GUM_AVF</button> <br>
     <button id = 'getUserMedia2' hidden= true>GetUserMedia2</button>
     <button id = 'getFakeUserMedia' hidden= true>GetFakeUserMedia</button>
     <button id = 'getAudioContext' hidden= true>GetAudioContext</button>
@@ -28,7 +32,7 @@ getMediaStream From<br>
     <button id = 'getAudioTag' hidden= true>GetAudioTag</button>
     <button id = 'getAudioTag2ch' hidden= true>GetAudioTag2ch</button>
     <button id = 'getAudioTagNo'  hidden= true>GetAudioTagWrongSample</button>
-    <button id = 'Stopms' hidden= true>StopMediaStream1</button><br>
+    <button id = 'Stopms'>StopMS</button><br>
     MediaStream object status<INPUT id='mediastream' SIZE=20 value = 'null'><p>
 MediaRecorder Function<br>
     <button id = 'Start'>Start</button>
@@ -41,20 +45,19 @@ MediaRecorder Function<br>
     <button id = 'requestData' hidden= true>requestData</button>
     <button id = 'Start0WithEvent' hidden= true>Start(0)WithRequestData</button>
     <button id = 'Save' hidden= true>SaveToIndexDB</button><br>
-    <button id = 'SaveBlob' hidden= true>SaveBlob</button><br>
+    <button id = 'SaveBlob'>SaveBlob</button><br>
+    <button id = 'SaveBlobSD'>SaveBlobSD</button><br>
     Blob Size<INPUT id='size' SIZE=4 value = 0>
     Blob Size2<INPUT id='size2' SIZE=4 value = 0 hidden= true><br>
     Recorder status<INPUT id='status' SIZE=4 value = ''><p>
 Playback Recording<br>
-    <button id = 'Playback'>PlayBackFromMemory</button> <br>
+    <button id = 'Playback'>PlayAudRec</button> <br>
     <button id = 'PlaybackIDX' hidden= true>PlayBackFromIndexDB</button><br>
----- Video function --- <br>
-    <button id = 'getAVUserMedia'>GetAVUserMedia</button> <Br>
-    <button id = 'getVUserMedia'>GetVideoUserMedia</button> <br>
-    <button id = 'getFakeAVUserMedia'>GetFakeAVUserMedia</button> <br>
     <button id = 'PlayVideo' hidden= true>PlayVideoFromFile</button>
     <button id = 'PlayVideo2' hidden= true>PlayVideoFromFile2</button>
-    <button id = 'PlaybackVideo' >PlayVideoBackFromMemory</button><br>
+    <button id = 'PlayVideo3' hidden= true>PlayVP9Video</button>
+    <button id = 'PlayVideo4' hidden= true>Play720pWebM</button>
+    <button id = 'PlaybackVideo' >PlayVidRec</button><br>
     <video id="videoelemsrc" width="640" height="480"></video>
     <video id="videoelem" width="640" height="480"></video>
   </body>
