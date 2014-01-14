@@ -1,0 +1,13 @@
+<script>
+o0 = document.createElement('video')
+o0.src = "video.webm";
+o1 = o0.mozCaptureStreamUntilEnded();
+o2 = new MediaRecorder(o1);
+setInterval(function anonymous() {
+	try { o2.pause() } catch(e) {}
+}, 5);
+setInterval(function anonymous() {
+	try { o2.start(0) } catch(e) {}
+}, 1);
+setTimeout("window.location.reload()", 100);
+</script>
