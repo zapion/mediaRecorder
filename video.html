@@ -18,12 +18,11 @@ function PlaybackVideo() {
   var a = document.getElementById('vvv');
   var b;
   a.play();
-  setTimeout(function() {
-    b = a.mozCaptureStreamUntilEnded();
-  }, 1000);
+
   var mMediaRecorder;
 
   setTimeout(function() {
+    b = a.mozCaptureStreamUntilEnded();
     mMediaRecorder = new MediaRecorder(b);
     mMediaRecorder.onstop = function() { alert("mr stopped size = " + mBlob.size); }
     mMediaRecorder.ondataavailable = function (e) {
