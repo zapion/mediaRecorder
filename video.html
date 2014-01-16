@@ -22,7 +22,7 @@ function PlaybackVideo() {
   var mMediaRecorder;
 
   setTimeout(function() {
-    b = a.mozCaptureStreamUntilEnded();
+    b = a.mozCaptureStream();
     mMediaRecorder = new MediaRecorder(b);
     mMediaRecorder.onstop = function() { alert("mr stopped size = " + mBlob.size); }
     mMediaRecorder.ondataavailable = function (e) {
