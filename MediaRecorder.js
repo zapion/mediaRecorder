@@ -375,7 +375,7 @@ function binStringToHex3(s) {
 }
 
 function PlaybackVideo() {
-  _FReader = new FileReader();
+  _FReader = new FileReader();mBlob
 //bug...
   _FReader.readAsDataURL(mBlob);
   _FReader.onload = function (_FREvent) {
