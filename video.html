@@ -16,22 +16,21 @@ function PlaybackVideo() {
 
   var mBlob;
   var a = document.getElementById('vvv');
-a.play();
-  var b = a.mozCaptureStreamUntilEnded();
-
-  var mMediaRecorder = new MediaRecorder(b);
-  mMediaRecorder.onstop = function() { alert("mr stopped size = " + mBlob.size); }
-  mMediaRecorder.ondataavailable = function (e) {
-    mBlob = new Blob([mBlob, e.data], {type: e.data.type});
-  }
+  var b;
+  a.play();
   setTimeout(function() {
+    b = a.mozCaptureStreamUntilEnded();
+  }, 1000);
+  var mMediaRecorder;
+
+  setTimeout(function() {
+    mMediaRecorder = new MediaRecorder(b);
+    mMediaRecorder.onstop = function() { alert("mr stopped size = " + mBlob.size); }
+    mMediaRecorder.ondataavailable = function (e) {
+      mBlob = new Blob([mBlob, e.data], {type: e.data.type});
+    }
     mMediaRecorder.start(1000);
   }, 2000);
-
-  setTimeout(function() {
-    mMediaRecorder.stop();
-    PlaybackVideo();
-  }, 120000);
 
 
 </script>
