@@ -1,0 +1,9 @@
+<audio controls id="audio" src = "dtmfmono48k.ogg"></audio>normal tag     <br>
+
+<audio controls id="audio2" src = "dtmfmono48k.ogg"></audio>with mozCaptureStreamUntilEnded  can't play   <br>
+
+----
+<script>
+  var audioply = document.getElementById("audio2");
+  mozSrcObject = audioply.mozCaptureStreamUntilEnded();
+</script>
