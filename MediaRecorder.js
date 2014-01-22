@@ -386,7 +386,7 @@ function PlaybackVideo() {
 
 function PlayVideo()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/onepiece.webm';
+  document.getElementById("videoelemsrc").src = 'onepiece.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
@@ -394,7 +394,7 @@ function PlayVideo()
 
 function PlayVideo2()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/synctest.webm';
+  document.getElementById("videoelemsrc").src = 'synctest.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
@@ -402,7 +402,7 @@ function PlayVideo2()
 
 function PlayVideo3()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/vp9cake.webm';
+  document.getElementById("videoelemsrc").src = 'vp9cake.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
@@ -410,14 +410,14 @@ function PlayVideo3()
 
 function PlayVideo4()
 {
-  document.getElementById("videoelemsrc").src = 'https://rawgithub.com/randylin/mediaRecorder/master/720p.webm';
+  document.getElementById("videoelemsrc").src = '720p.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
 }
 
 function installHostedApp() {
-  var request = navigator.mozApps.install('https://rawgithub.com/randylin/mediaRecorder/master/manifest.webapp');
+  var request = navigator.mozApps.install('manifest.webapp');
 
   request.onsuccess = function(e) {
     console.log('Installed successfully');
