@@ -1,7 +1,8 @@
 <script>
 o0 = document.createElement('video')
-o0.src = "video.webm";
+o0.src = "seek.webm";
 o1 = o0.mozCaptureStreamUntilEnded();
+
 o2 = new MediaRecorder(o1);
 setInterval(function anonymous() {
 	try { o2.pause() } catch(e) {}
