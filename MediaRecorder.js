@@ -416,6 +416,14 @@ function PlayVideo4()
   mMediaRecorder = null;
 }
 
+function PlayVideo5()
+{
+  document.getElementById("videoelemsrc").src = 'Robocop.mp4';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 function installHostedApp() {
   var request = navigator.mozApps.install('manifest.webapp');
 
@@ -459,4 +467,5 @@ window.onload = function() {
   document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
   document.getElementById("PlayVideo4").onclick = function() { PlayVideo4(); };
+  document.getElementById("PlayVideo5").onclick = function() { PlayVideo5(); };
   videoReplay = document.getElementById("videoelem");};
