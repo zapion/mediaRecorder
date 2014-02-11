@@ -2,14 +2,71 @@
   "version": "1.0",
   "name": "Record",
   "description": "Web app Record",
-  "launch_path": "MediaRecorder.html",
+  "launch_path": "MediaRecorderB2G.html",
+  "type": "certified",
   "developer": {
     "name": "The Gaia Team",
     "url": "https://github.com/mozilla-b2g/gaia"
   },
-  "type": "privileged",
   "permissions": {
-    "audio-capture": {},
-    "device-storage:music":{ "access": "readcreate" }
+    "alarms":{},
+    "audio-channel-notification":{},
+    "contacts":{ "access": "readcreate" },
+    "desktop-notification":{},
+    "storage":{},
+    "device-storage:sdcard":{ "access": "readcreate" },
+    "systemXHR":{},
+    "settings":{ "access": "readonly" },
+    "tcp-socket":{}
+  },
+  "locales": {
+    "ar": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "de": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "el": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "en-US": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "es": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "fr": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "it": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "pt-BR": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "ru": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "tr": {
+      "name": "Record",
+      "description": "Web app Record"
+    },
+    "zh-TW": {
+      "name": "Record",
+      "description": "Web app Record"
+    }
+  },
+  "default_locale": "en-US",
+  "icons": {
+    "128": "/style/icons/mic.png"
   }
 }

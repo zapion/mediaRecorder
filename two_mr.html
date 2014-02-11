@@ -1,0 +1,11 @@
+<script>
+    var ac = new window.AudioContext();
+    var dest = ac.createMediaStreamDestination();
+    var stream = dest.stream;
+    var recorder = new MediaRecorder(stream);
+    recorder.ondataavailable = function (e) {dump "mr e1");;
+    recorder.start(0);
+    var recorder2 = new MediaRecorder(stream);
+    recorder2.start(1000);
+
+</script>

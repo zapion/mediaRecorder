@@ -1,0 +1,51 @@
+<p>Click the play button. Then click the record button. Wait a couple
+  of seconds and click Stop. This creates a new audio file that
+  includes just the recorded part of the original. Stop playing the
+  original and start playing the recorded copy.
+<br>
+<audio id="player" controls src="Salt_Creek.ogg"></audio>
+<button onclick="record()">Record</button>
+<button onclick="stop()">Stop</button>
+
+<script>
+// XXX: set security.fileuri.strict_origin_policy to false to make this work
+// offline.
+function dumpNode(n) {
+  console.log(n);
+  console.log("# inputs: ", n.numberOfInputs);
+  console.log("# outputs: ", n.numberOfOutputs);
+  console.log("# channels: ", n.channelCount);
+  console.log("channelCountMode", n.channelCountMode);
+  console.log("interpretation", n.channelInterpretation);
+}
+
+var player = document.getElementById('player');
+player.mozCaptureStreamUntilEnded();
+var recorder = new MediaRecorder(player.mozCaptureStreamUntilEnded());
+
+
+function record() {
+  recorder.start();
+}
+
+function stop() {
+  recorder.stop();
+}
+
+recorder.ondataavailable = function(e) {
+  var blob = e.data;
+  console.log('type, size', blob.type, blob.size);
+
+  var url = URL.createObjectURL(blob);
+  console.log(url);
+
+  var croppedaudio = new Audio();
+  croppedaudio.controls = true;
+  croppedaudio.src = url;
+  document.body.appendChild(croppedaudio);
+};
+
+
+</script>
+
+

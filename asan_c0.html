@@ -1,0 +1,32 @@
+<script>
+var intervals = [];
+for ( i = 0 ; i < 10; i++) {
+  o0 = document.createElement('video');
+  o0.src = "cors.webm";
+  o1 = o0.mozCaptureStreamUntilEnded();
+  o2 = new MediaRecorder(o1);
+  intervals.push(setInterval(function anonymous() {
+	  try { o2.start(0) } catch(e) { }
+  }, 6))
+  intervals.push(setInterval(function anonymous() {
+	  try { o2.start(2000) } catch(e) { }
+  }, 7))
+  intervals.push(setInterval(function anonymous() {
+	  try { o2.requestData() } catch(e) {}
+  }, 2))
+  intervals.push(setInterval(function anonymous() {
+	  try { o2.requestData() } catch(e) { }
+  }, 1))
+  intervals.push(setInterval(function anonymous() {
+	  try { o2.start(2000) } catch(e) { }
+  }, 1))
+  try { o2.start(2000) } catch(e) { }
+
+}
+
+window.setTimeout(function anonymous() {
+  for ( i = 0; i < intervals.length; i++) {
+    clearInterval(intervals[i]);
+  }
+}, 2000);
+</script>

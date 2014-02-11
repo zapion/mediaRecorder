@@ -7,6 +7,41 @@ var mBlob2;
 var audioReplay = document.createElement('audio');
 var audioout = document.createElement('audio');
 var videoReplay;
+
+
+function saveToStorage(blob, storage, filename, partInfo, isRetry) {
+    pendingStorageWrites++;
+    var dstorage = navigator.getDeviceStorage(storage);
+    var req = dstorage.delete(filename);
+    req = dstorage.addNamed(blob, filename);
+    req.onerror = function() {
+      console.warn('failed to save attachment to', storage, filename,
+                   'type:', blob.type);
+      pendingStorageWrites--;
+      // if we failed to unique the file after appending junk, just give up
+      if (isRetry) {
+        if (pendingStorageWrites === 0)
+          done();
+        return;
+      }
+      // retry by appending a super huge timestamp to the file before its
+      // extension.
+      var idxLastPeriod = filename.lastIndexOf('.');
+      if (idxLastPeriod === -1)
+        idxLastPeriod = filename.length;
+      filename = filename.substring(0, idxLastPeriod) + '-' + Date.now() +
+                   filename.substring(idxLastPeriod);
+      saveToStorage(blob, storage, filename, partInfo, true);
+    };
+    req.onsuccess = function() {
+      console.log('saved attachment to', storage, filename, 'type:', blob.type);
+      partInfo.file = [storage, filename];
+      if (--pendingStorageWrites === 0)
+        done();
+    };
+}
+
+
 function gUM() {
   navigator.mozGetUserMedia({audio:true},
                        function(s) {
@@ -132,7 +167,8 @@ function SaveBlobSD() {
   }
 
   dump("save " + mBlob.size);
-  saveToStorage(mBlob, "music", fname, "abc", 1);
+  fname = Math.round(10000*Math.random()) + fname;
+  saveToStorage(mBlob, "sdcard", fname, "abc", 1);
 }
 
 function SaveBlob() {
@@ -151,6 +187,7 @@ function SaveBlob() {
   document.body.appendChild(downloadLink);
   downloadLink.click();
   document.body.removeChild(downloadLink);
+    
 }
 
 function errorcb(e) {
@@ -375,7 +412,7 @@ function binStringToHex3(s) {
 }
 
 function PlaybackVideo() {
-  _FReader = new FileReader();mBlob
+  _FReader = new FileReader();
 //bug...
   _FReader.readAsDataURL(mBlob);
   _FReader.onload = function (_FREvent) {
@@ -411,6 +448,14 @@ function PlayVideo3()
 function PlayVideo4()
 {
   document.getElementById("videoelemsrc").src = '720p.webm';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
+function PlayVideo5()
+{
+  document.getElementById("videoelemsrc").src = '352x288.webm';
   document.getElementById("videoelemsrc").play();
   mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
   mMediaRecorder = null;
@@ -459,4 +504,5 @@ window.onload = function() {
   document.getElementById("PlayVideo2").onclick = function() { PlayVideo2(); };
   document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
   document.getElementById("PlayVideo4").onclick = function() { PlayVideo4(); };
+  document.getElementById("PlayVideo5").onclick = function() { PlayVideo5(); };
   videoReplay = document.getElementById("videoelem");};
