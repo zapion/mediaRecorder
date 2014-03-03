@@ -110,11 +110,13 @@ function dataavailablecb(aData) {
     mBlob = new Blob([aData.data], {type: aData.data.type});
   }
   document.getElementById('size').value  = mBlob.size;
+  document.getElementById('mime').value = aData.data.type;
 }
 
 function dataavailablecb2(aData) {
-  mBlob2 = new Blob([mBlob2, aData.data], {type: 'audio/ogg'});
+  mBlob2 = new Blob([mBlob2, aData.data], {type: aData.data.type});
   document.getElementById('size2').value  = mBlob2.size;
+  document.getElementById('mime').value = aData.data.type;
 }
 
 function done() {

@@ -1,12 +1,17 @@
 {
   "name": "Record",
   "description": "Web app Record",
+  "type": "certified",
   "launch_path": "/MediaRecorderB2G.html",
   "developer": {
     "name": "The Gaia Team",
     "url": "https://github.com/mozilla-b2g/gaia"
   },
   "permissions": {
+    "audio-capture":{},
+    "video-capture":{},
+    "storage":{},
+    "device-storage:sdcard":{ "access": "readcreate" }
   },
   "locales": {
     "ar": {
