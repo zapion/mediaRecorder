@@ -2,7 +2,7 @@
   "name": "Record",
   "description": "Web app Record",
   "type": "certified",
-  "launch_path": "/MediaRecorderB2G.html",
+  "launch_path": "/MediaRecorder.html",
   "developer": {
     "name": "The Gaia Team",
     "url": "https://github.com/mozilla-b2g/gaia"
@@ -59,8 +59,5 @@
       "description": "Web app Record"
     }
   },
-  "default_locale": "en-US",
-  "icons": {
-    "128": "/style/icons/mic.png"
-  }
+  "default_locale": "en-US"
 }

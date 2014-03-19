@@ -290,6 +290,21 @@ function Start(time) {
   document.getElementById('status').value  = mMediaRecorder.state;
 }
 
+function StartOpt() {
+  if (mMediaRecorder == null) {
+    mMediaRecorder = new MediaRecorder(mMediaStream, {"mimeType": "audio/3gpp"});
+  } else if (mMediaRecorder.state != "inactive") {
+    alert("mMediaRecorder is not inactive, stop it first");
+    return;
+  }
+  mBlob = null;
+  mMediaRecorder.onstop = stopcb;
+  mMediaRecorder.ondataavailable = dataavailablecb;
+  mMediaRecorder.onerror = errorcb;
+  mMediaRecorder.start(1000);
+  document.getElementById('status').value  = mMediaRecorder.state;
+}
+
 function StartI2(time) {
   if (mMediaRecorder2 == null)
     mMediaRecorder2 = new MediaRecorder(mMediaStream);
@@ -463,6 +478,14 @@ function PlayVideo5()
   mMediaRecorder = null;
 }
 
+function PlayVideo6()
+{
+  document.getElementById("videoelemsrc").src = 'pixel_aspect_ratio.ogg';
+  document.getElementById("videoelemsrc").play();
+  mMediaStream = document.getElementById("videoelemsrc").mozCaptureStreamUntilEnded();
+  mMediaRecorder = null;
+}
+
 function installHostedApp() {
   var request = navigator.mozApps.install('manifest.webapp');
 
@@ -487,6 +510,7 @@ window.onload = function() {
   document.getElementById("Start").onclick = function() { Start(1000);};
   document.getElementById("SetNull").onclick = function() { mMediaRecorder = null; };
   document.getElementById("Start0").onclick = function() { Start(0);};
+  document.getElementById("StartOpt").onclick = function() { StartOpt();};
   document.getElementById("Start0WithEvent").onclick = function() { Start0WithEvent();};
   document.getElementById("Stop").onclick = function() { Stop(); };
   document.getElementById("Stopms").onclick = function() { stopms(); };
@@ -507,4 +531,5 @@ window.onload = function() {
   document.getElementById("PlayVideo3").onclick = function() { PlayVideo3(); };
   document.getElementById("PlayVideo4").onclick = function() { PlayVideo4(); };
   document.getElementById("PlayVideo5").onclick = function() { PlayVideo5(); };
+  document.getElementById("PlayVideo6").onclick = function() { PlayVideo6(); };
   videoReplay = document.getElementById("videoelem");};

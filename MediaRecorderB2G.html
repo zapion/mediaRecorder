@@ -2,7 +2,7 @@
 
   <head>
     <meta charset="utf-8">
-    <meta http-equiv="pragma" content="no-cache">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
     <title>MediaRecorder Demo</title>
 
     <style>
@@ -11,7 +11,7 @@
     }
     button {
       font-size: 40px;
-      witdh = 100%
+      width: 100%
     }
     </style>
 
@@ -37,6 +37,7 @@ getMediaStream From<br>
 MediaRecorder Function<br>
     <button id = 'Start'>Start</button>
     <button id = 'StartI2 ' hidden= true>StartInst2</button>
+    <button id = 'StartOpt'>StartOpt</button>
     <button id = 'SetNull' hidden= true>SetMRNUll</button>
     <button id = 'Start0' hidden= true>Start(0)</button>
     <button id = 'Stop'>Stop</button>
@@ -59,6 +60,7 @@ Playback Recording<br>
     <button id = 'PlayVideo3' hidden= true>PlayVP9Video</button>
     <button id = 'PlayVideo4' hidden= true>Play720pWebM</button>
     <button id = 'PlayVideo5' hidden= true >Play352WebM</button>
+    <button id = 'PlayVideo6'>PlayAspect</button>
     <button id = 'PlaybackVideo' >PlayVidRec</button><br>
     <video id="videoelemsrc" width="640" height="480"></video>
     <video id="videoelem" width="640" height="480"></video>
